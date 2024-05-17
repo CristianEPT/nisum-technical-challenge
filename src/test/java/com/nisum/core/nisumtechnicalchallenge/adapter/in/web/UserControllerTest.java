@@ -1,7 +1,6 @@
 package com.nisum.core.nisumtechnicalchallenge.adapter.in.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
@@ -11,11 +10,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.google.gson.Gson;
 import com.nisum.core.nisumtechnicalchallenge.adapter.in.web.configuration.PasswordPatternConfiguration;
-import com.nisum.core.nisumtechnicalchallenge.adapter.in.web.exception.ConflictException;
 import com.nisum.core.nisumtechnicalchallenge.adapter.in.web.model.UserResponse;
 import com.nisum.core.nisumtechnicalchallenge.application.port.in.CreateUserUseCase;
 import com.nisum.core.nisumtechnicalchallenge.domain.Phone;
 import com.nisum.core.nisumtechnicalchallenge.domain.User;
+import com.nisum.core.nisumtechnicalchallenge.domain.exception.EmailAlreadyExistsException;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -135,7 +134,7 @@ class UserControllerTest {
             "test", "test@domain.com", "Password123", List.of(new Phone("123123123", "1", "57")));
 
     given(createUserUseCase.createUser(user))
-        .willThrow(new ConflictException("The email already exist"));
+        .willThrow(new EmailAlreadyExistsException("The email already exist"));
 
     var executionResult =
         mockMvc
