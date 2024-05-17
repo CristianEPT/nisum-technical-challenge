@@ -28,7 +28,7 @@ class UserServiceTest {
   @InjectMocks UserService userService;
 
   private static final String TEST_TOKEN =
-      "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2aXZpYW5hQHRlc3QuY29tIiwiaWF0IjoxNjg3Njg0MTY2LCJleHAiOjE2ODc4NTY5NjZ9.B9EwlDxd-e-j4XQwCwI1LbiKIsa-UBSZWZwaO3tm4HqcG_EfB1sPwe8fi5TmCmKm2MmwmEE6inn6gh6gO57zSw";
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjcmlzdGlhbkB0ZXN0LmNvbSIsInVzZXIiOiJDcmlzdGlhbiIsImlhdCI6MTcxNTk3MTUzOCwiZXhwIjoxNzE2MTQ0MzM3fQ.CxAkjtldTdgsWyQ6WCIcTkONrqiN8S_D_IP2ZDTug3I";
 
   @Test
   void givenCorrectUser_ThenSaveUser_ReturnInformation() {
