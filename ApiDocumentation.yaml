@@ -1,0 +1,111 @@
+openapi: 3.0.1
+info:
+  title: Nisum User
+  version: v 1.0.0
+servers:
+  - url: http://localhost:3002
+    description: Generated server url
+tags:
+  - name: User
+    description: The user api
+paths:
+  /nisum/user:
+    post:
+      tags:
+        - User
+      summary: Register new user
+      description: Register new user and generate token
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Fail validation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PhoneRequest:
+      required:
+        - cityCode
+        - countryCode
+        - number
+      type: object
+      properties:
+        number:
+          type: string
+        cityCode:
+          type: string
+        countryCode:
+          type: string
+    UserRequest:
+      required:
+        - name
+        - email
+        - password
+        - phones
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneRequest'
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: integer
+          format: int64
+        modified:
+          type: integer
+          format: int64
+        lastLogin:
+          type: integer
+          format: int64
+        token:
+          type: string
+        active:
+          type: boolean
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: string
+        exception:
+          type: string
+        message:
+          type: string
